@@ -4,19 +4,30 @@ import './App.css';
 
 
 class Pokemon extends Component {
-  
+    constructor(props){
+      super(props);
+      this.state = {
+        name: this.props.pokemon.name,
+        type: this.props.pokemon.type,
+        level:this.props.pokemon.level
+      }
+    }
   render(){
-    this.state = {
-      name: this.props.pokemon.name,
-      type: this.props.pokemon.type,
-      level:this.props.pokemon.level
+
+    const shouldEvlove = (level) => { 
+      if(level === 16){
+        let message = `${this.state.name} Is trying to evlove`;
+        alert(message);
+      }
+    };
+
+     const levelUp= () => {
+      this.setState({level: this.state.level + 1});
+      shouldEvlove(this.state.level);
     }
 
-     const level= () => {
-      
-    }
    return( 
-   <div className="pokemon" onClick={this.props.test}>
+   <div className="pokemon" onClick={levelUp}>
       <h1>Pokemon:{this.state.name}</h1>
       <h2>Type:{this.state.type}</h2>
       <h2>Level:{this.state.level}</h2>
