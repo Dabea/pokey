@@ -4,12 +4,22 @@ import './App.css';
 
 
 class Pokemon extends Component {
-   styles = {};
+  
   render(){
+    this.state = {
+      name: this.props.pokemon.name,
+      type: this.props.pokemon.type,
+      level:this.props.pokemon.level
+    }
+
+     const level= () => {
+      
+    }
    return( 
-   <div className="pokemon">
-      <h1>Pokemon:{this.props.pokemon.name}</h1>
-      <h2>Type:{this.props.pokemon.type}</h2>
+   <div className="pokemon" onClick={this.props.test}>
+      <h1>Pokemon:{this.state.name}</h1>
+      <h2>Type:{this.state.type}</h2>
+      <h2>Level:{this.state.level}</h2>
    </div>)
   }
 
@@ -18,8 +28,9 @@ class Pokemon extends Component {
 
 class App extends Component {
   render() {
-    
-    const monster = [{name:'Bulbasaur', type:'Grass'}, {name:'Charmander', type:'Fire'}];
+   
+   
+    const monster = [{name:'Bulbasaur', type:'Grass', level:1}, {name:'Charmander', type:'Fire', level:2}];
     return (
       <div className="App">
         <header className="App-header">
@@ -29,7 +40,7 @@ class App extends Component {
         <p className="App-intro">
         </p>
         <div className="center">
-          <Pokemon pokemon={monster[0]} />
+          <Pokemon pokemon={monster[0] }  />
           <Pokemon  pokemon={monster[1]} />
         </div>
        
