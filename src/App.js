@@ -14,21 +14,29 @@ class Pokemon extends React.Component {
       
     }
     componentDidMount() {
-      this.getPokemonInfo();
+      console.log("The Name value is: ", this.props.pokemon.name)
+      this.getPokemonInfo(this.props.pokemon.name);
+     
     }
 
-    calculateGainedExp(opponet){
-      //Opponet Base EXP for pokemon type * opponet Level * (1.0 if wild || 1.5 if trainerballte) / 7 (Split between Number of pokemon in the battle)
-      opponet.level
-      opponet.baseExp
-    }
+    // calculateGainedExp(opponet){
+    //   //Opponet Base EXP for pokemon type * opponet Level * (1.0 if wild || 1.5 if trainerballte) / 7 (Split between Number of pokemon in the battle)
+    //   opponet.level
+    //   opponet.baseExp
+    // }
 
     getPokemonInfo = function(pokemon){
       console.log('get Pokemon Data');
-      fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon)
+      fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.toLowerCase())
         .then(response => response.json() )
         .then((json) => {
-          this.setState({name: json.name});  
+          this.setState(
+            {name: json.name,
+              weight: json.weight
+            },
+
+          ); 
+           console.log(json)
         })
     } 
     
@@ -52,6 +60,7 @@ class Pokemon extends React.Component {
    <div className="pokemon" onClick={levelUp}>
     <img src={this.pros} className="App-logo" alt="logo" />
       <h1>Pokemon:{this.state.name}</h1>
+      <h2>Weight:{this.state.weight}</h2>
       <h2>Type:{this.state.type}</h2>
       <h2>Level:{this.state.level}</h2>
       {/* sprite
